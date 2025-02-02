@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".LoginActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingTop="100sp">
+
+        <TextView
+            android:id="@+id/msgText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="100sp"
+            android:textSize="30sp"
+            android:text="Hello World!" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="30dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Username: "
+                android:textColor="#000000"
+                android:textSize="20dp"></TextView>
+
+            <EditText
+                android:id="@+id/login_username_edt"
+                android:layout_width="300dp"
+                android:layout_height="50dp"
+                android:hint="Enter username here"
+                android:textColor="#000000"></EditText>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Password: "
+                android:textColor="#000000"
+                android:textSize="20dp"></TextView>
+
+            <EditText
+                android:id="@+id/login_password_edt"
+                android:layout_width="300dp"
+                android:layout_height="50dp"
+                android:hint="Enter password here"
+                android:inputType="textPassword"
+                android:textColor="#000000"></EditText>
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/signup_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="50sp"
+            android:background="#00FFFFFF"
+            android:paddingLeft="0sp"
+            android:paddingTop="0sp"
+            android:paddingRight="0sp"
+            android:paddingBottom="0sp"
+            android:text="New User"
+            android:textColor="#76B7C7"
+            android:textSize="16sp" />
+
+        <Button
+            android:id="@+id/forgot_password_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="50sp"
+            android:background="#00FFFFFF"
+            android:paddingLeft="0sp"
+            android:paddingTop="0sp"
+            android:paddingRight="0sp"
+            android:paddingBottom="0sp"
+            android:text="Forgot Password"
+            android:textColor="#76B7C7"
+            android:textSize="16sp"
+            android:visibility="gone" />
+
+        <Button
+            android:id="@+id/login_button"
+            android:layout_width="125sp"
+            android:layout_height="50sp"
+            android:layout_gravity="center"
+            android:layout_marginTop="100sp"
+            android:textSize="20sp"
+            android:text="Login" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
