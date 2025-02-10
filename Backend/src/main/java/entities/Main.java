@@ -34,8 +34,6 @@ public class Main implements WebSocketConfigurer {
     CommandLineRunner initUser(UserRepository userRepository, RecipeRepository recipeRepository,
                                IngredientRepository ingredientRepository, FavoriteRepository favoriteRepository) {
         return args -> {
-            //User user1 = new User("Bob123", "123456789"); // Ensure password is encoded if necessary
-            //userRepository.save(user1);
         };
     }
 

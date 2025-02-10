@@ -125,7 +125,7 @@ public class ImageController {
 
             return ResponseEntity.ok("Image uploaded successfully for ingredient ID: " + iid);
         } catch (IOException | SQLException e) {
-            e.printStackTrace();  // Log the error for debugging
+            e.printStackTrace();  // Log the error
             return ResponseEntity.status(500).body("Failed to upload image: " + e.getMessage());
         }
     }
@@ -213,7 +213,7 @@ public class ImageController {
 
             return ResponseEntity.ok("Image updated successfully for recipe ID: " + rid);
         } catch (IOException | SQLException e) {
-            e.printStackTrace();  // Log the error for debugging
+            e.printStackTrace();  // Log the error 
             return ResponseEntity.status(500).body("Failed to update image: " + e.getMessage());
         }
     }

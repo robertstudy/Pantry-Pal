@@ -3,7 +3,6 @@ package entities.Recipes;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import entities.Ingredients.Ingredient;
-
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
@@ -33,11 +32,9 @@ public class RecipeService {
                     ObjectMapper mapper = new ObjectMapper();
                     JsonNode responseBody = mapper.readTree(response.toString());
 
-                    // Check if we received any products
                     if (responseBody.has("products") && responseBody.get("products").isArray()) {
                         JsonNode products = responseBody.get("products");
 
-                        // Initialize accumulators and counters
                         double totalEnergy = 0.0, totalFat = 0.0, totalSaturatedFat = 0.0, totalCarbs = 0.0, totalSugars = 0.0;
                         double totalProtein = 0.0, totalSalt = 0.0, totalFiber = 0.0;
                         int productCount = 0;
@@ -45,7 +42,6 @@ public class RecipeService {
                         for (JsonNode product : products) {
                             JsonNode nutriments = product.path("nutriments");
 
-                            // Only process products with available nutriments
                             if (nutriments != null && nutriments.isObject()) {
                                 totalEnergy += getNutrientValue(nutriments, "energy_100g");
                                 totalFat += getNutrientValue(nutriments, "fat_100g");
@@ -61,7 +57,6 @@ public class RecipeService {
                         }
 
                         if (productCount > 0) {
-                            // Set averaged values with rounding to two decimal places
                             ingredient.setEnergyPer100g(roundToTwoDecimalPlaces(totalEnergy / productCount));
                             ingredient.setFatPer100g(roundToTwoDecimalPlaces(totalFat / productCount));
                             ingredient.setSaturatedFatPer100g(roundToTwoDecimalPlaces(totalSaturatedFat / productCount));
@@ -87,12 +82,10 @@ public class RecipeService {
         }
     }
 
-    // Helper method for rounding to 2 decimal places
     private static double roundToTwoDecimalPlaces(double value) {
         return Math.round(value * 100.0) / 100.0;
     }
 
-    // Helper method for nutrient extraction
     private static double getNutrientValue(JsonNode nutriments, String nutrientName) {
         JsonNode nutrientNode = nutriments.get(nutrientName);
         return (nutrientNode != null && nutrientNode.isNumber()) ? nutrientNode.asDouble() : 0.0;

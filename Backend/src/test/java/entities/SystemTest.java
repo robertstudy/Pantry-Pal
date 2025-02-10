@@ -21,7 +21,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.web.server.LocalServerPort;	// SBv3
+import org.springframework.boot.test.web.server.LocalServerPort; // SBv3
 
 import java.io.File;
 import java.util.List;
@@ -46,8 +46,8 @@ public class SystemTest {
                 .when()
                 .get("/users")
                 .then()
-                .statusCode(HttpStatus.OK.value()) // Ensure HTTP 200 OK
-                .body("size()", greaterThan(0));  // Ensure the response contains users
+                .statusCode(HttpStatus.OK.value())
+                .body("size()", greaterThan(0));
     }
 
     @Test
@@ -59,7 +59,7 @@ public class SystemTest {
                 .when()
                 .get("/users/uid/" + userId)
                 .then()
-                .statusCode(HttpStatus.OK.value()) // Ensure HTTP 200 OK
+                .statusCode(HttpStatus.OK.value())
                 .body("username", equalTo("Bob"));
     }
 
@@ -180,14 +180,14 @@ public class SystemTest {
                 .post("/users");
 
         createResponse.then()
-                .statusCode(HttpStatus.CREATED.value()); // HTTP 201 Created
+                .statusCode(HttpStatus.CREATED.value()); 
 
         Response response = given()
                 .when()
                 .get("/users/" + "userToDelete");
 
         response.then()
-                .statusCode(HttpStatus.OK.value()); // Ensure HTTP 200 OK
+                .statusCode(HttpStatus.OK.value()); // HTTP 200 OK
 
         int userId = response.jsonPath().getInt("uid");
 
@@ -248,7 +248,7 @@ public class SystemTest {
                 .get("/recipes")
                 .then()
                 .statusCode(HttpStatus.OK.value())
-                .body("size()", greaterThan(0)); // Ensure the response contains recipes
+                .body("size()", greaterThan(0)); 
     }
 
     @Test
@@ -275,7 +275,7 @@ public class SystemTest {
                 .when()
                 .post("/recipes")
                 .then()
-                .statusCode(HttpStatus.CREATED.value()); // Ensure the recipe is created
+                .statusCode(HttpStatus.CREATED.value()); 
     }
 
     @Test
@@ -291,7 +291,7 @@ public class SystemTest {
                 .when()
                 .put("/recipes")
                 .then()
-                .statusCode(HttpStatus.OK.value()); // Ensure update was successful
+                .statusCode(HttpStatus.OK.value()); 
     }
 
     @Test
@@ -320,8 +320,8 @@ public class SystemTest {
                 .when()
                 .get("/ingredients")
                 .then()
-                .statusCode(HttpStatus.OK.value()) // Ensure HTTP 200 OK
-                .body("size()", greaterThan(0)); // Ensure the response contains ingredients
+                .statusCode(HttpStatus.OK.value())
+                .body("size()", greaterThan(0)); 
     }
 
     @Test
@@ -357,7 +357,7 @@ public class SystemTest {
     @Test
     public void testCreateIngredientWithInvalidData() throws JSONException {
         JSONObject newIngredient = new JSONObject();
-        newIngredient.put("iname", "");  // Invalid name (empty string)
+        newIngredient.put("iname", "");  
 
         Response response = given()
                 .contentType("application/json")
@@ -366,7 +366,7 @@ public class SystemTest {
                 .post("/ingredients");
 
         response.then()
-                .statusCode(HttpStatus.BAD_REQUEST.value());  // Ensure proper error for invalid data
+                .statusCode(HttpStatus.BAD_REQUEST.value());  
     }
 
     @Test
@@ -411,88 +411,82 @@ public class SystemTest {
 
     @Test
     public void testUploadRecipeImage() throws Exception {
-        // Ensure the file exists before uploading
-        File imageFile = new File("C:/Users/Bob Study/Downloads/test.jpg");
+        
+        File imageFile = new File("XXXXXXXXXX");
 
-        // Check if the file exists
+        
         Assert.assertTrue("File does not exist at the specified path", imageFile.exists());
 
         given()
-                .multiPart("image", imageFile)  // Send the image as multipart with the correct key "image"
-                .contentType(ContentType.MULTIPART)  // Specify the content type as multipart
+                .multiPart("image", imageFile)
+                .contentType(ContentType.MULTIPART)
                 .when()
-                .post("/images/recipe/1")  // API endpoint for uploading the image
+                .post("/images/recipe/1") 
                 .then()
                 .statusCode(HttpStatus.OK.value());
     }
 
     @Test
     public void testUpdateRecipeImage() throws Exception {
-        // Ensure the file exists before uploading
-        File imageFile = new File("C:/Users/Bob Study/Downloads/test.jpg");
+        File imageFile = new File("XXXXXXXXXX");
 
-        // Check if the file exists
         Assert.assertTrue("File does not exist at the specified path", imageFile.exists());
 
         given()
-                .multiPart("image", imageFile)  // Send the image as multipart with the correct key "image"
-                .contentType(ContentType.MULTIPART)  // Specify the content type as multipart
+                .multiPart("image", imageFile)  
+                .contentType(ContentType.MULTIPART)
                 .when()
-                .post("/images/recipe/2")  // API endpoint for uploading the image
+                .post("/images/recipe/2")  
                 .then()
                 .statusCode(HttpStatus.OK.value());
 
         given()
-                .multiPart("image", imageFile)  // Send the image as multipart with the correct key "image"
-                .contentType(ContentType.MULTIPART)  // Specify the content type as multipart
+                .multiPart("image", imageFile) 
+                .contentType(ContentType.MULTIPART) 
                 .when()
-                .patch("/images/recipe/2")  // API endpoint for uploading the image
+                .patch("/images/recipe/2")
                 .then()
                 .statusCode(HttpStatus.OK.value());
     }
 
     @Test
     public void testUploadIngredientImage() throws Exception {
-        // Ensure the file exists before uploading
-        File imageFile = new File("C:/Users/Bob Study/Downloads/test.jpg");
+        
+        File imageFile = new File("XXXXXXXXXX");
 
-        // Check if the file exists
         Assert.assertTrue("File does not exist at the specified path", imageFile.exists());
 
         given()
-                .multiPart("image", imageFile)  // Send the image as multipart with the correct key "image"
-                .contentType(ContentType.MULTIPART)  // Specify the content type as multipart
+                .multiPart("image", imageFile)  
+                .contentType(ContentType.MULTIPART)
                 .when()
-                .post("/images/ingredient/1")  // API endpoint for uploading the image
+                .post("/images/ingredient/1")
                 .then()
                 .statusCode(HttpStatus.OK.value());
     }
 
     @Test
     public void testUpdateIngredientImage() throws Exception {
-        // Ensure the file exists before uploading
-        File imageFile = new File("C:/Users/Bob Study/Downloads/test.jpg");
+        
+        File imageFile = new File("XXXXXXXXXX");
 
-        // Check if the file exists
-        Assert.assertTrue("File does not exist at the specified path", imageFile.exists());
+        Assert.assertTrue("", imageFile.exists());
 
         given()
-                .multiPart("image", imageFile)  // Send the image as multipart with the correct key "image"
-                .contentType(ContentType.MULTIPART)  // Specify the content type as multipart
+                .multiPart("image", imageFile)  
+                .contentType(ContentType.MULTIPART)  
                 .when()
-                .post("/images/ingredient/2")  // API endpoint for uploading the image
+                .post("/images/ingredient/2")  
                 .then()
                 .statusCode(HttpStatus.OK.value());
 
         given()
-                .multiPart("image", imageFile)  // Send the image as multipart with the correct key "image"
-                .contentType(ContentType.MULTIPART)  // Specify the content type as multipart
+                .multiPart("image", imageFile)  
+                .contentType(ContentType.MULTIPART)  
                 .when()
-                .patch("/images/ingredient/2")  // API endpoint for uploading the image
+                .patch("/images/ingredient/2")
                 .then()
                 .statusCode(HttpStatus.OK.value());
     }
 
-
 }
-

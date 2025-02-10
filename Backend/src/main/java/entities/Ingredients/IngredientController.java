@@ -11,8 +11,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
-// update to test runners
-
 @RestController
 @RequestMapping("/ingredients")
 public class IngredientController {

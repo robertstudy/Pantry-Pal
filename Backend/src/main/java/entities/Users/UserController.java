@@ -9,7 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
+import io.github.cdimascio.dotenv.Dotenv;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -27,7 +27,6 @@ public class UserController {
     @Autowired
     private UserRepository userRepository;
 
-    // JSON response messages
     private final String success = "{\"message\":\"success\"}";
     private final String failure = "{\"message\":\"failure\"}";
 
@@ -147,7 +146,6 @@ public class UserController {
             return new ResponseEntity<>("User not found", HttpStatus.NOT_FOUND);
         }
 
-        // Update the password
         existingUser.setPassword(newPassword);
 
         // Save the updated user in the repository
@@ -185,7 +183,6 @@ public class UserController {
     @DeleteMapping("/{uid}")
     public ResponseEntity<String> deleteUserByUid(@PathVariable int uid) {
         User existingUser = userRepository.findByUid(uid);
-        //User existingUser = userRepository.findByUid(user.getUid());
         if (existingUser == null) {
             return new ResponseEntity<>("User not found", HttpStatus.NOT_FOUND);
         }
@@ -203,7 +200,8 @@ public class UserController {
     @GetMapping("/locate/{uid}")
     public ResponseEntity<List<Map<String, String>>> getLocalStoresWithLinks(@PathVariable int uid) {
 
-        String apiKey = "AIzaSyAOSoLV4xv8hmrDgqVJ9x8lENTSORX1VUI";
+        Dotenv dotenv = Dotenv.load();
+        String apiKey = dotenv.get("API_KEY");
 
         User user = userRepository.findByUid(uid);
         if (user == null || user.getGeoLocation() == null || user.getGeoLocation().size() < 2) {
@@ -263,7 +261,7 @@ public class UserController {
                     storeData.put("rating", rating);
                     storeData.put("userRatingsTotal", userRatingsTotal);
                     storeData.put("distance", String.format("%.2f miles", distance));
-                    storeData.put("status", openStatus); // open or closed status
+                    storeData.put("status", openStatus); 
                     storeData.put("directionsLink", directionsUrl);
 
                     storesWithLinks.add(storeData);

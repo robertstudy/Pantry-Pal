@@ -58,7 +58,7 @@ public class ChatServer {
             for (int i = 1; i < split_msg.length; i++) {
                 actualMessageBuilder.append(split_msg[i]).append(" ");
             }
-            String destUserName = split_msg[0].substring(1); // Get rid of '@'
+            String destUserName = split_msg[0].substring(1); 
             String actualMessage = actualMessageBuilder.toString();
 
             if (usernameSessionMap.containsKey(destUserName)) {

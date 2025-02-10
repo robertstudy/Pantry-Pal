@@ -3,9 +3,6 @@ package entities.Favorites;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 
-/**
- * Represents a Favorite entity that links users to their favorite recipes.
- */
 @Schema(description = "Entity representing a user's favorite recipe.")
 @Entity
 @Table(name = "favorite")
@@ -22,15 +19,9 @@ public class Favorite {
     @Schema(description = "Unique identifier for the recipe that is favorited.", example = "7", requiredMode = Schema.RequiredMode.REQUIRED)
     private int rid;  // Recipe ID
 
-    /**
-     * Default constructor.
-     */
     public Favorite() {
     }
 
-    /**
-     * Constructs a new Favorite entity with a specific user ID and recipe ID.
-     */
     public Favorite(
             @Schema(description = "Unique identifier for the user.", example = "4") int uid,
             @Schema(description = "Unique identifier for the recipe.", example = "7") int rid) {
